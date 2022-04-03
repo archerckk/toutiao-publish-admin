@@ -5,7 +5,7 @@
 import axios from 'axios'
 
 // 我们通过这个实例
-const request=axios.create({
+const request = axios.create({
   baseURL: 'http://api-toutiao-web.itheima.net' // 请求的基础路径
 })
 // 请求拦截器
