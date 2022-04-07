@@ -1,10 +1,10 @@
 <template>
   <el-container class="container">
-    <el-aside width="200px" class="aside">
-      <app-aside class="aside-child"></app-aside>
+    <el-aside width="auto" class="aside" >
+      <app-aside class="aside-child" ></app-aside>
     </el-aside>
     <el-container>
-      <el-header class="header">
+      <el-header class="header" >
       <app-header></app-header>
       </el-header>
       <el-main class="main">
@@ -25,7 +25,9 @@ export default {
   components: { AppAside, AppHeader },
   props: {},
   data () {
-    return {}
+    return {
+      // isCollapse: false
+    }
   },
   computed: {},
   watch: {},

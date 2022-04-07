@@ -9,6 +9,19 @@ const request = axios.create({
   baseURL: 'http://api-toutiao-web.itheima.net' // 请求的基础路径
 })
 // 请求拦截器
+request.interceptors.request.use(function (config) {
+  // Do something before request is sent
+  const user = JSON.parse(window.localStorage.getItem(('user')))
+  // console.log(user)
+  if (user) {
+    config.headers.Authorization = `Bearer ${user.token}`
+  }
+  return config
+}, function (error) {
+  // Do something with request error
+  return Promise.reject(error)
+})
+
 // 响应拦截器
 
 export default request

@@ -88,6 +88,7 @@ export default {
           message: '登录成功',
           type: 'success'
         })
+        window.localStorage.setItem('user', JSON.stringify(res.data.data))
         this.loginLoading = false
 
         // 跳转到首页

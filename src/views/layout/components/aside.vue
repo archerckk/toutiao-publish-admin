@@ -4,6 +4,7 @@
     background-color="#545c64"
     text-color="#fff"
     active-text-color="#ffd04b"
+    :collapse="isCollapse"
     router
   >
     <login-header class="logo"></login-header>
@@ -41,19 +42,30 @@
 
 <script>
 import LoginHeader from '../../login/components/login_header'
+import Public from '@/public'
 
 export default {
   name: 'AppAside',
   components: { LoginHeader },
-  props: {},
+  props: [],
   data () {
-    return {}
+    return {
+      isCollapse: false
+    }
   },
   computed: {},
   watch: {},
-  created () {},
-  mounted () {},
+  created () {
+
+  },
+  mounted () {
+    Public.$on('is-collapse', val => {
+      this.isCollapse = val
+      // console.log(`传来的数据是：${val}`)
+    })
+  },
   methods: {
+
   }
 }
 </script>
