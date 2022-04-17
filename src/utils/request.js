@@ -3,10 +3,21 @@
  **/
 
 import axios from 'axios'
+import JsonBigInt from 'json-bigint'
 
 // 我们通过这个实例
 const request = axios.create({
-  baseURL: 'http://api-toutiao-web.itheima.net' // 请求的基础路径
+  baseURL: 'http://api-toutiao-web.itheima.net', // 请求的基础路径
+  transformResponse: [function (data) {
+    // Do whatever you want to transform the data
+    try {
+      console.log(data)
+      return JsonBigInt.parse(data)
+    } catch (err) {
+      console.log('转换失败', err)
+      return data
+    }
+  }]
 })
 // 请求拦截器
 request.interceptors.request.use(function (config) {
