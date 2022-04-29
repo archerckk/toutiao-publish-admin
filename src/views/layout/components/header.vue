@@ -45,7 +45,7 @@ export default {
     loadUserProfile () {
       getUserProfile().then(res => {
         this.user = res.data.data
-        console.log(`test: ${this.user}`)
+        // console.log(`test: ${this.user}`)
       })
     },
     sendCollapse () {

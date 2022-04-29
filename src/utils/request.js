@@ -11,7 +11,7 @@ const request = axios.create({
   transformResponse: [function (data) {
     // Do whatever you want to transform the data
     try {
-      console.log(data)
+      // console.log(data)
       return JsonBigInt.parse(data)
     } catch (err) {
       console.log('转换失败', err)

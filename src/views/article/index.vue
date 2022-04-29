@@ -115,6 +115,7 @@
               circle
               type="primary"
               icon="el-icon-edit"
+              @click="$router.push('/publish?id='+scope.row.id.toString())"
             ></el-button>
             <el-button
               size="mini"
@@ -229,7 +230,7 @@ export default {
       }).then(() => {
         // 删除文章逻辑
         delArticle(articleId).then(res => {
-          console.log(res)
+          // console.log(res)
         })
         this.loadArticles(this.page) // 重新加载页面视图
       }).catch(() => {
