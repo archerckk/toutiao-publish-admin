@@ -48,7 +48,13 @@
                        @click="onCollect(img)"
                        :loading="img.loading">
             </el-button>
-            <i class="el-icon-delete"></i>
+            <el-button type="danger"
+                       icon="el-icon-delete"
+                       circle
+                       size="mini"
+                       @click="onDelete(img)"
+                       :loading="img.loading">
+            </el-button>
           </div>
         </el-col>
       </el-row>
@@ -91,7 +97,8 @@
 <script>
 import {
   getImage,
-  collectImage
+  collectImage,
+  deleteImage
 } from '@/api/image'
 
 export default {
@@ -150,6 +157,13 @@ export default {
       img.loading = true
       collectImage(img.id, !img.is_collected).then(res => {
         img.is_collected = !img.is_collected
+        img.loading = false
+      })
+    },
+    onDelete (img) {
+      img.loading = true
+      deleteImage(img.id).then(res => {
+        this.loadImage(this.page)
         img.loading = false
       })
     }

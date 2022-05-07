@@ -32,3 +32,11 @@ export const collectImage = (imageID, collect) => {
     }
   })
 }
+
+// 删除素材
+export const deleteImage = imageID => {
+  return request({
+    method: 'DELETE',
+    url: `/mp/v1_0/user/images/${imageID}`
+  })
+}
