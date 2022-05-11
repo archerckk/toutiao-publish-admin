@@ -80,9 +80,9 @@ export default {
   data () {
     return {
       article: [],
-      page: 1,
-      pageSize: 10,
-      total_count: 0
+      page: 1, // 控制当前页码
+      pageSize: 10, // 每页显示的数据数量
+      total_count: 0 // 总的消息条数
     }
   },
   computed: {},
@@ -123,6 +123,7 @@ export default {
       this.loadComment(page)
     },
     handleSizeChange (pageSize) {
+      // 每次页码改变回到第一页，并且重新加载数据
       this.pageSize = pageSize
       this.page = 1
       this.loadComment(this.page)

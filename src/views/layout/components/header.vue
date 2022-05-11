@@ -9,7 +9,7 @@
 
       <el-dropdown>
         <div class="avatar-warp">
-          <img class="avatar" src="../user.jpg" alt="用户头像">
+          <img class="avatar" :src="user.photo" alt="用户头像">
           <span>{{ user.name }}</span>
           <i class="el-icon-arrow-down el-icon--right"></i>
         </div>
@@ -23,7 +23,7 @@
 
 <script>
 import { getUserProfile } from '@/api/user'
-import Public from '@/public'
+import globalBus from '@/utils/global_bus'
 
 export default {
   name: 'AppHeader',
@@ -39,6 +39,10 @@ export default {
   watch: {},
   created () {
     this.loadUserProfile()
+    globalBus.$on('updateUser', (data) => {
+      this.user.name = data.name
+      this.user.photo = data.photo
+    })
   },
   mounted () {},
   methods: {
@@ -50,7 +54,7 @@ export default {
     },
     sendCollapse () {
       this.isCollapse = !this.isCollapse
-      Public.$emit('is-collapse', this.isCollapse)
+      globalBus.$emit('is-collapse', this.isCollapse)
     },
     handleLogout () {
       this.$confirm('是否退出账号', '提示', {

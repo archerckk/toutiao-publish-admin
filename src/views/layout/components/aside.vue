@@ -42,7 +42,7 @@
 
 <script>
 import LoginHeader from '../../login/components/login_header'
-import Public from '@/public'
+import globalBus from '@/utils/global_bus'
 
 export default {
   name: 'AppAside',
@@ -59,7 +59,7 @@ export default {
 
   },
   mounted () {
-    Public.$on('is-collapse', val => {
+    globalBus.$on('is-collapse', val => {
       this.isCollapse = val
       // console.log(`传来的数据是：${val}`)
     })
