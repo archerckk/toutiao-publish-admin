@@ -4,6 +4,7 @@
 
 import axios from 'axios'
 import JsonBigInt from 'json-bigint'
+import router from '@/router'
 
 // 我们通过这个实例
 const request = axios.create({
@@ -34,6 +35,16 @@ request.interceptors.request.use(function (config) {
 })
 
 // 响应拦截器
+request.interceptors.response.use(function (response) {
+  return response
+}, function (error) {
+  console.dir(error)
+  if (error && error.response.status === 401) {
+    window.localStorage.removeItem('user')
+    router.push('/login')
+  }
+  return Promise.reject(error)
+})
 
 export default request
 // 谁要使用就加载 request 模块

@@ -45,7 +45,8 @@
               <input
                   id="file"
                   type="file"
-                  hidden ref="file"
+                  hidden
+                  ref="file"
                   @change="onImageChange"
               >
             </el-col>

@@ -21,10 +21,18 @@
           <el-form-item label="封面">
             <el-radio-group v-model="article.cover.type">
               <el-radio :label="1">单图</el-radio>
-              <el-radio :label="2">三图</el-radio>
+              <el-radio :label="3">三图</el-radio>
               <el-radio :label="0">无图</el-radio>
               <el-radio :label="-1">自动</el-radio>
             </el-radio-group>
+            <!--子组件上传图片-->
+            <template v-if="article.cover.type > 0">
+              <upload-cover v-for="(cover,index) in article.cover.type"
+                            :key="cover"
+                            v-model="article.cover.images[index]"
+              />
+            </template>
+
           </el-form-item>
           <el-form-item label="频道" prop="channel_id">
             <el-select v-model="article.channel_id" placeholder="请选择频道">
@@ -48,6 +56,7 @@
 </template>
 
 <script>
+import uploadCover from './components/upload_cover'
 import { getArticleChannels, addArticle, getArticle, editArticle } from '@/api/articles'
 import { imageUpload } from '@/api/image'
 import {
@@ -68,7 +77,7 @@ import {
 
 export default {
   name: 'PublishIndex',
-  components: {},
+  components: { uploadCover },
   props: {},
   data () {
     return {
@@ -186,6 +195,9 @@ export default {
       getArticle(this.$route.query.id).then(res => {
         this.article = res.data.data
       })
+    },
+    onCoverUpload (index, url) {
+      this.article.cover.images[index] = url
     }
   }
 }
