@@ -39,7 +39,8 @@ request.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   console.dir(error)
-  if (error && error.response.status === 401) {
+  const status = error.response.status
+  if (error && status === 401) {
     window.localStorage.removeItem('user')
     router.push('/login')
   }

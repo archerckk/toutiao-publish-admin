@@ -1,26 +1,10 @@
 <template>
   <div class="">
     <div class="action-head" >
-      <!--单选按钮-->
-      <el-radio-group
-          v-model="collect"
-          size="small"
-          @change="loadImage(1)"
-      >
-        <el-radio-button :label="false" >全部</el-radio-button>
-        <el-radio-button :label="true" >收藏</el-radio-button>
-      </el-radio-group>
-      <el-button
-          v-if="isShowAdd"
-          type="success"
-          size="mini"
-          @click="dialogUploadVisible = true"
-      >
-        上传图片
-      </el-button>
     </div>
     <!--  图片控件-->
     <el-row>
+      <!--<div></div>-->
       <el-col
           class="image_item"
           :span="4"
@@ -31,39 +15,23 @@
           v-for="(img,index) in images"
           :key="index"
       >
-        <el-image
-            class="image_style"
-            :src="img.url"
-            @click="selected=index"
-            fit="cover">
-        </el-image>
-
-        <!--图片选中-->
-        <div class="selected" v-if="isSelectedShow&&selected===index"></div>
-
-        <!--图片操作按钮-->
-        <div v-if="isActionShow" class="image_action">
-          <el-button type="warning"
-                     :icon="img.is_collected ?'el-icon-star-on': 'el-icon-star-off'"
-                     circle
-                     size="mini"
-                     @click.native="onCollect(img)"
-                     :loading="img.loading">
-          </el-button>
-          <el-button type="danger"
-                     icon="el-icon-delete"
-                     circle
-                     size="mini"
-                     @click="onDelete(img)"
-                     :loading="img.loading">
-          </el-button>
+        <div class="image_style">
+          <el-image
+              :src="img.url"
+              @click="selected=index"
+              fit="cover">
+            <div slot="error" class="image-slot">
+              <i  class="el-icon-picture-outline"></i>
+            </div>
+          </el-image>
+          <span style="margin-top: 5px" >我是粉丝</span>
+          <el-button type="primary" size="mini" style="width:60px;margin-top: 5px">+关注</el-button>
         </div>
       </el-col>
     </el-row>
 
     <!--分页-->
     <el-pagination
-        style="padding-top: 20px"
         background
         layout="prev, pager, next"
         :total="total_images"
@@ -204,35 +172,20 @@ export default {
 }
 .image_item{
   position: relative;
-  height: 100px;
-  .image_action{
-    background-color: rgba(204, 204, 204,.5);
-    height: 30px;
-    font-size: 20px;
-    position: absolute;
-    bottom: 5px;
-    left: 0px;
-    right: 3px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-  }
+  margin-bottom: 10px;
+  border: #187dee 1px;
+
   .image_style{
-    display: flex;
-    padding: 10px;
-    border: #B2C0D0 1px solid;
+    height: 100px;
+    width: 100px;
+    padding-bottom: 5px;
+    display: flex ;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    border: #B2C0D0 1px dashed;
   }
 }
-.selected{
-  background-size: contain;
-  background: url("../assets/selected.png") no-repeat;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-}
+
 </style>
